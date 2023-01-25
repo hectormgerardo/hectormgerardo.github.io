@@ -1,3 +1,3 @@
 # hectormgerardo.github.io
 
-This is my personal repository of languages
+This is my now my personal website
