@@ -1,0 +1,3 @@
+[submodule "jiojkari"]
+	path = jiojkari
+	url = git@github.com:hectormgerardo/jiojkari.git
