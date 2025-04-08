@@ -2,26 +2,128 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Personal Log</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hector M Gerardo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Charis+SIL:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Charis SIL', serif;
+      font-size: 1.15em;
+      color: #131313;
+/*      background: linear-gradient(to bottom, #6295C8, #F4A261);*/
+      background-color: #A37A9A;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.5;
+      max-width: 800px;
+    }
+
+    header {
+      background-color: transparent;
+      color: #696969;
+      padding: 1em 0;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    header > h1{
+      color:antiquewhite;
+    }
+    header > p {
+      color: antiquewhite;
+    }
+
+    footer > p {
+      color: antiquewhite;
+      text-align: center;
+    }
+
+    h1, h2 {
+      font-weight: 900;
+      color: #131313;
+      size: 2em;
+      text-align: center;
+    }
+
+    .content-section {
+      background-color: antiquewhite;
+      padding: 1em;
+      margin-bottom: 20px;
+      border-radius: 1em;
+    }
+
+    a {
+      color: #6295C8;
+      color:#F4A261;
+      color: #131313;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      color: #696969;
+      text-decoration: none;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+    }
+
+    li::before {
+      content: "\AA5C";
+      content: "\2736";
+      color: #131313;
+      font-size: 1.15em;
+      font-weight: 500;
+      display: inline-block;
+      width: 1.5em;
+      margin-left: -1em;
+    }
+
+    li {
+      margin-bottom: 8px;
+
+    .cactus-silhouette {
+      color: #2E2E2E;
+      font-size: 2em;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+
+  </style>
 </head>
 <body>
-  <div class="container">
+  <header>
     <h1>Hector M Gerardo</h1>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Linguistics</a></li>
-        <li><a href="#">Translation</a></li>
-        <li><a href="#">Coding Cave</a></li>
-        <li><a href="#">Blog</a></li>
-      </ul>
-    </nav>
+    <p>Linguist. Translator. Developer.</p>
+  </header>
 
-    <section>
-      <p>Welcome to my site. I'm a Linguistics Research Academic with a passion for code and translation.</p>
-      <!-- More content coming soon -->
-    </section>
-  </div>
+  <main>
+    <div class="content-section">
+      <h2>About Me</h2>
+      <p>Hello! This is a section where I can introduce myself using the elegant Charis SIL font. The colors are inspired by the stunning sunset in the image you provided, creating a calm and inviting atmosphere.</p>
+      <p>The subtle gradients and accent colors help to highlight important information without being too overwhelming.</p>
+    </div>
+    <div class="content-section">
+      <h2>Projects</h2>
+      <ul>
+        <li><a href="#">Lottia. A linguistic corpus for the Yaqui Language.</a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#">Project Three</a></li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>Contact</h2>
+      <p>You can reach me at <a href="mailto:your.email@example.com">hectormgerardo@gmail.com</a>.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 @hectormgerardo</p>
+  </footer>
 </body>
 </html>

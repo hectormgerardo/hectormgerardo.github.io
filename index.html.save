@@ -1,0 +1,16 @@
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Charis+SIL:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>My Awesome Page</h1>
+  </header>
+  <main>
+    <p style="font-family: 'Charis SIL', serif;">This is some text using the Charis SIL font.</p>
+    <h2>A Subheading</h2>
+    <p style="font-family: 'Charis SIL', serif; font-weight: 700;">This subheading is using the bold weight.</p>
+  </main>
+</body>
