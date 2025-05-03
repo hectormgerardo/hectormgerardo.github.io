@@ -7,13 +7,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Charis+SIL:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <style>
+    header>*,footer>*,.language-selector>label{color:antiquewhite !important;} 
     body {
       font-family: 'Charis SIL', serif;
       font-size: 1.15em;
       color: #131313;
-/*      background: linear-gradient(to bottom, #6295C8, #F4A261);*/
+    /*background: linear-gradient(to bottom, #6295C8, #F4A261);*/
       background-color: #A37A9A;
       margin: 0 auto;
       padding: 20px;
@@ -28,15 +28,8 @@
       text-align: center;
       margin-bottom: 1em;
     }
-    header > h1{
-      color:antiquewhite;
-    }
-    header > p {
-      color: antiquewhite;
-    }
 
     footer > p {
-      color: antiquewhite;
       text-align: center;
     }
 
@@ -84,6 +77,7 @@
 
     li {
       margin-bottom: 8px;
+    }
 
     .cactus-silhouette {
       color: #2E2E2E;
@@ -92,38 +86,196 @@
       margin-bottom: 20px;
     }
 
+    .language-selector {
+        display: flex;
+        align-items: center;
+        color:antiquewhite;
+    }
 
+    .language-item{
+        display: inline-flex;
+        align-items: center;
+        margin-right: 15px;
+        cursor: pointer;
+        font-size: 0.8em;
+    }
+    .flag-icon {
+        width: 2em;
+        height: auto;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+    .language-label{
+        vertical-align: middle;
+    }
+
+    .language-item.selected .language-label {
+        font-weight: bold;
+    }
   </style>
 </head>
 <body>
+  <div class="language-selector">
+        <div id="language-list">
+        <span class="language-item">
+            <img style="visibility: hidden;" src="images/flags/en.svg" class="flag-icon" alt="">
+            <span class="language-label" data-i18n-key="language_label">Language:</span>
+        </span>
+        <span class="language-item selected" data-lang="en">
+            <img src="images/flags/en.svg" alt="Arizonan Flag" class="flag-icon">
+            <span class="language-label">English</span>
+        </span>
+        <span class="language-item selected" data-lang="es">
+            <img src="images/flags/es.svg" alt="Sonoran Flag" class="flag-icon">
+            <span class="language-label">Español</span>
+        </span>
+        <span class="language-item" data-lang="yaq">
+            <img src="images/flags/yaq.svg" alt="Yaqui Flag" class="flag-icon">
+            <span class="language-label">Jiaknoki</span>
+        </span>
+        <span class="language-item" data-lang="de">
+            <img src="images/flags/de.svg" alt="German Flag" class="flag-icon">
+            <span class="language-label">Deutsch</span>
+        </span>
+        </div>
+    </div>
   <header>
-    <h1>Hector M Gerardo</h1>
-    <p>Linguist. Translator. Developer.</p>
+    <h1 data-i18n-key="title">Hector M Gerardo</h1>
+    <p data-i18n-key="subtitle">Linguist. Translator. Developer.</p>
   </header>
 
   <main>
     <div class="content-section">
-      <h2>About Me</h2>
-      <p>Hello! This is a section where I can introduce myself using the elegant Charis SIL font. The colors are inspired by the stunning sunset in the image you provided, creating a calm and inviting atmosphere.</p>
-      <p>The subtle gradients and accent colors help to highlight important information without being too overwhelming.</p>
+      <h2 data-i18n-key="about_me">About Me</h2>
+      <p data-i18n-key="welcome">Howdy y'all. Welcome to my personal page. Here I collect the things that I like, my work and other interesting stuff.</p>
     </div>
     <div class="content-section">
-      <h2>Projects</h2>
+      <h2 data-i18n-key="projects">Projects</h2>
       <ul>
-        <li><a href="#">Lottia. A linguistic corpus for the Yaqui Language.</a></li>
-        <li><a href="#"></a></li>
-        <li><a href="#">Project Three</a></li>
+        <li><a href="#" data-i18n-key="item-projects-1">Linguistic humor analysis methodologies for Yaqui narratives. Thesis work for Linguistics</a></li>
+        <li><a href="#" data-i18n-key="item-projects-2">Lottia.A linguistic corpus for the Yaqui Language.</a></li>
+        <li><a href="#"data-i18n-key="item-projects-3">Jiojkari.My personal library of books.</a></li>
       </ul>
     </div>
 
     <div class="content-section">
       <h2>Contact</h2>
-      <p>You can reach me at <a href="mailto:your.email@example.com">hectormgerardo@gmail.com</a>.</p>
+      <p>You can reach me at <a href="mailto:hectormgerardo@gmail.com">hectormgerardo@gmail.com</a>.</p>
     </div>
   </main>
 
   <footer>
     <p>&copy; 2025 @hectormgerardo</p>
   </footer>
+ <script>
+    let currentLang = 'en';
+    let translations = {};
+    const languageData = {};
+
+    function loadLanguage(langCode) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = `lang/${langCode}.js`;
+            script.onload = () => {
+                translations = languageData[langCode];
+                updateContent();
+                currentLang = langCode;
+                updateSelectedLanguageUI(langCode);
+                resolve();
+            };
+            script.onerror = () => {
+                console.error(`Could not load language file: lang/${langCode}.js`);
+                if (currentLang !== 'en') {
+                    loadLanguage('en').then(resolve).catch(reject);
+                } else {
+                    reject(`Failed to load language: ${langCode}`);
+                }
+            };
+            document.head.appendChild(script);
+        });
+    }
+
+    function updateContent() {
+        const elementsToTranslate = document.querySelectorAll('[data-i18n-key]');
+        elementsToTranslate.forEach(element => {
+            const key = element.getAttribute('data-i18n-key');
+            if (translations[key]) {
+                element.textContent = translations[key]; // Use textContent for labels
+            }
+        });
+    }
+
+    function updateSelectedLanguageUI(langCode) {
+        const languageItems = document.querySelectorAll('.language-item');
+        languageItems.forEach(item => {
+            item.classList.remove('selected');
+            if (item.getAttribute('data-lang') === langCode) {
+                item.classList.add('selected');
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadLanguage(currentLang);
+
+        const languageList = document.getElementById('language-list');
+        if (languageList) {
+            languageList.addEventListener('click', (event) => {
+                const clickedItem = event.target.closest('.language-item');
+                if (clickedItem) {
+                    const langCode = clickedItem.getAttribute('data-lang');
+                    if (langCode && langCode !== currentLang) {
+                        loadLanguage(langCode);
+                    }
+                }
+            });
+        }
+    });
+    // let currentLang = 'en';
+    // let translations = {};
+    // const languageData = {};
+
+    // function loadLanguage(langCode) {
+    //   const script = document.createElement('script');
+    //   script.src = `lang/${langCode}.js`;
+    //   script.onload = () => {
+    //     translations = languageData[langCode];
+    //     updateContent();
+    //   };
+    //   script.onerror = () => {
+    //     console.error(`Could not load language file: lang/${langCode}.js`);
+    //     if (currentLang !== 'en') {
+    //       loadLanguage('en');
+    //     }
+    //   };
+    //   document.head.appendChild(script);
+    // }
+
+    // function updateContent() {
+    //   const elementsToTranslate = document.querySelectorAll('[data-i18n-key]');
+    //   elementsToTranslate.forEach(element => {
+    //     const key = element.getAttribute('data-i18n-key');
+    //     if (translations[key]) {
+    //       element.innerHTML = translations[key];
+    //     }
+    //   });
+    // }
+
+    // function changeLanguage(lang) {
+    //   loadLanguage(lang);
+    // }
+
+    // document.addEventListener('DOMContentLoaded', () => {
+    //   const langSelect = document.getElementById('language');
+    //   loadLanguage(currentLang);
+    //   loadLanguage(currentLang).then(() => {
+    //     if (langSelect) {
+    //       langSelect.value = currentLang;
+    //     }
+    //   });
+    // });
+  </script>
 </body>
+
 </html>
