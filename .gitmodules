@@ -1,3 +1,7 @@
 [submodule "jiojkari"]
 	path = jiojkari
 	url = git@github.com:hectormgerardo/jiojkari.git
+	
+[submodule "blog"]
+	path = blog
+	url = git@github.com:hectormgerardo/blog
