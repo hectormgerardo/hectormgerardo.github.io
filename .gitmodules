@@ -5,3 +5,6 @@
 [submodule "blog"]
 	path = blog
 	url = git@github.com:hectormgerardo/blog
+[submodule "yaqui-resources"]
+	path = yaqui-resources
+	url = git@github.com:hectormgerardo/yaqui-resources
